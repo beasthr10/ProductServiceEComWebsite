@@ -42,7 +42,7 @@ public class ProductController {
                 dto.getPrice(),
                 dto.getImage());
 
-        // convert this to dto and  return
+        // convert  this to dto and  return
         ProductResponseDTO productResponseDTO =  mapper.convertToProductResponseDTO(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(productResponseDTO);
     }
