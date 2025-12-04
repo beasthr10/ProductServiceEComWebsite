@@ -2,12 +2,11 @@ package com.beasthr10.productserviceecomwebsite.Service;
 
 import com.beasthr10.productserviceecomwebsite.Repository.CategoryRepo;
 import com.beasthr10.productserviceecomwebsite.Repository.ProductRepo;
-import com.beasthr10.productserviceecomwebsite.exception.InvalidProductCreationException;
-import com.beasthr10.productserviceecomwebsite.exception.InvalidProductcall;
+import com.beasthr10.productserviceecomwebsite.Exception.InvalidProductCreationException;
+import com.beasthr10.productserviceecomwebsite.Exception.InvalidProductcall;
 import com.beasthr10.productserviceecomwebsite.model.Category;
 import com.beasthr10.productserviceecomwebsite.model.Product;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -27,7 +26,7 @@ public class SelfProductService implements ProductService{
     }
 
     @Override
-    public Product createProduct(String title, String description, String titlecategory, BigDecimal price, String image) {
+    public Product createProduct(String title, String description, String titlecategory, BigDecimal price, String image) throws InvalidProductCreationException {
 
         //NORMALIZE INPUT DATA
         titlecategory = titlecategory.toLowerCase();
@@ -63,7 +62,7 @@ public class SelfProductService implements ProductService{
     }
     // Get Product by id
     @Override
-    public Product getProductById(Long id){
+    public Product getProductById(Long id) throws InvalidProductcall {
         return productRepo.findById(id)
                 .orElseThrow(() -> new InvalidProductcall(
                         "Product with id " + id + " does not exist"));
@@ -71,7 +70,7 @@ public class SelfProductService implements ProductService{
 
     // Update Product
     @Override
-    public Product updateProduct(Long id,String title, String description, String titlecategory, BigDecimal price, String image){
+    public Product updateProduct(Long id,String title, String description, String titlecategory, BigDecimal price, String image) throws InvalidProductcall {
 
         Product product =productRepo.findById(id)
                 .orElseThrow(() -> new InvalidProductcall(
@@ -116,7 +115,7 @@ public class SelfProductService implements ProductService{
 
     // List of Product By Categeory
     @Override
-    public List<Product> getProductByCategory(String category_name){
+    public List<Product> getProductByCategory(String category_name) throws InvalidProductcall {
 
         Category exestingcat = categoryRepo.findByCategory(category_name);
 

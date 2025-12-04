@@ -1,5 +1,7 @@
 package com.beasthr10.productserviceecomwebsite.Service;
 
+import com.beasthr10.productserviceecomwebsite.Exception.InvalidProductCreationException;
+import com.beasthr10.productserviceecomwebsite.Exception.InvalidProductcall;
 import com.beasthr10.productserviceecomwebsite.model.Product;
 
 import java.math.BigDecimal;
@@ -10,18 +12,18 @@ public interface ProductService {
                                  String description,
                                  String category,
                                  BigDecimal price,
-                                 String image);
+                                 String image) throws InvalidProductCreationException;
 
-    public Product getProductById(Long id);
+    public Product getProductById(Long id) throws InvalidProductcall;
 
     public Product updateProduct(Long id,
                                  String title,
                                  String description,
                                  String category,
                                  BigDecimal price,
-                                 String image);
+                                 String image) throws InvalidProductcall;
     public String deleteProduct(Long id);
 
-    public List<Product> getProductByCategory(String category_name);
+    public List<Product> getProductByCategory(String category_name) throws InvalidProductcall;
 
 }

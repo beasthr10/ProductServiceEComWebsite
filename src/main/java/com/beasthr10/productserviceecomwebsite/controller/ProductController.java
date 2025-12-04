@@ -1,10 +1,11 @@
 package com.beasthr10.productserviceecomwebsite.controller;
 
 import com.beasthr10.productserviceecomwebsite.Builder.ProductMapper;
+import com.beasthr10.productserviceecomwebsite.Exception.InvalidProductCreationException;
+import com.beasthr10.productserviceecomwebsite.Exception.InvalidProductcall;
 import com.beasthr10.productserviceecomwebsite.Service.ProductService;
 import com.beasthr10.productserviceecomwebsite.dto.CreateProductRequestDTO;
 import com.beasthr10.productserviceecomwebsite.dto.ProductResponseDTO;
-import com.beasthr10.productserviceecomwebsite.exception.InvalidProductcall;
 import com.beasthr10.productserviceecomwebsite.model.Product;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class ProductController {
 
     // create product
     @PostMapping("/product")
-    public ResponseEntity<ProductResponseDTO> createProduct(@Valid @RequestBody CreateProductRequestDTO dto){
+    public ResponseEntity<ProductResponseDTO> createProduct(@Valid @RequestBody CreateProductRequestDTO dto) throws InvalidProductCreationException {
 
         // normalizing input data
         dto.setTitle(dto.getTitle().trim());
@@ -49,7 +50,7 @@ public class ProductController {
 
     //Get product by id
     @GetMapping("/product/{id}")
-    public ResponseEntity<ProductResponseDTO> getProductById(@PathVariable("id") Long id){
+    public ResponseEntity<ProductResponseDTO> getProductById(@PathVariable("id") Long id) throws InvalidProductcall {
         Product product = productService.getProductById(id);
 
         ProductResponseDTO dto = mapper.convertToProductResponseDTO(product);
@@ -59,7 +60,7 @@ public class ProductController {
 
     //Update product
     @PutMapping("/product/{id}")
-    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable("id") Long id, @Valid @RequestBody CreateProductRequestDTO dto){
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable("id") Long id, @Valid @RequestBody CreateProductRequestDTO dto) throws InvalidProductcall {
 
         // normalizing input data
         dto.setTitle(dto.getTitle().trim());
@@ -87,7 +88,7 @@ public class ProductController {
     // Products by Category
 
     @GetMapping("/product/cat/{category}")
-    public List<ProductResponseDTO> getProductByCategory(@PathVariable("category") String category){
+    public List<ProductResponseDTO> getProductByCategory(@PathVariable("category") String category) throws InvalidProductcall {
         category.trim();
 
         List<Product> listproduct = productService.getProductByCategory(category);
