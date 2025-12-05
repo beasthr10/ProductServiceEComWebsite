@@ -4,5 +4,6 @@ import com.beasthr10.productserviceecomwebsite.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CategoryRepo extends JpaRepository<Category,Long> {
-    Category findByCategory(String title);
+
+    Category findByCategory(String titlecategory);
 }
