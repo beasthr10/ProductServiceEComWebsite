@@ -19,6 +19,7 @@ public class ControllerAdvice {
         errordto.setErrorstatus(400);
         return ResponseEntity.badRequest().body(errordto);
     }
+    // DTO check exception return
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorDTO> handelValidationError(MethodArgumentNotValidException ex){
 
@@ -28,6 +29,29 @@ public class ControllerAdvice {
 
         ErrorDTO errordto = new ErrorDTO();
         errordto.setErrormessage(invalidProductCreationException.getMessage());
+        errordto.setErrorstatus(400);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errordto);
+    }
+
+    // Invalid product call exception return
+    @ExceptionHandler(InvalidProductCreationException.class)
+    public ResponseEntity<ErrorDTO> handelInvalidProductCreationException(InvalidProductCreationException ex){
+
+
+        ErrorDTO errordto = new ErrorDTO();
+        errordto.setErrormessage(ex.getMessage());
+        errordto.setErrorstatus(400);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errordto);
+    }
+
+    @ExceptionHandler(InvalidProductcall.class)
+    public ResponseEntity<ErrorDTO> handelInvalidProductcall(InvalidProductcall ex){
+
+
+        ErrorDTO errordto = new ErrorDTO();
+        errordto.setErrormessage(ex.getMessage());
         errordto.setErrorstatus(400);
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errordto);
