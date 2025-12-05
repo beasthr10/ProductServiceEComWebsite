@@ -1,5 +1,6 @@
 package com.beasthr10.productserviceecomwebsite.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,8 @@ public class Product extends BaseModel{
     private String description;
     private BigDecimal price;
     private String imageUrl;
+
     @ManyToOne(cascade = {CascadeType.PERSIST}) // cascade type is used to do action in category if it is delete
+    @JsonIgnore
     private Category category;
 }
