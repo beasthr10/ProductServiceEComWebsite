@@ -19,7 +19,7 @@ public class Product extends BaseModel{
     private BigDecimal price;
     private String imageUrl;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST}) // cascade type is used to do action in category if it is delete
+    @ManyToOne(cascade = {CascadeType.PERSIST}) // cascade type is used to do  action in category if it is delete
     @JsonIgnore
     private Category category;
 }
