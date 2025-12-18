@@ -18,8 +18,6 @@ public class Category extends BaseModel {
     private String category;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "category", cascade = {CascadeType.REMOVE})
-
-
+    @OneToMany(mappedBy = "category", cascade = {CascadeType.REMOVE}, fetch = FetchType.EAGER)
     List<Product> products;
 }
